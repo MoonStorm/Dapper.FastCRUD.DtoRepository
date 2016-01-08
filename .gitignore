@@ -1,0 +1,11 @@
+/.vs
+/packages
+bin
+obj
+*.user
+*.nupkg
+/Releases/*.nupkg
+*.suo
+/.nunit/gui
+/TestResult.xml
+/Thumbs.db
