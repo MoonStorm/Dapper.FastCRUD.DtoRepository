@@ -2,11 +2,11 @@
 
 namespace Dapper.FastCrud.DtoRepository.Mappings
 {
-    using Dapper.FastCrud.DtoRepository.Translators;
+    using Dapper.FastCrud.DtoRepository.Converters;
 
     public class DtoSourceMapping<TSource>
     {
-        public void MapTo<TDestination>(Func<DtoDestinationMapping<TSource, TDestination>, IEntityTranslator<TSource, TDestination>> mapping)
+        public void To<TDestination>(Func<DbDestinationMapping<TSource, TDestination>, EntityConverter> mappingEntityConverter)
         {
             
         } 

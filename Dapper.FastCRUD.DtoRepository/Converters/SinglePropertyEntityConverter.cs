@@ -1,23 +1,23 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Translators
+﻿namespace Dapper.FastCrud.DtoRepository.Converters
 {
     using System.ComponentModel;
 
     /// <summary>
     /// Single to single property translator
     /// </summary>
-    public class SinglePropertyEntityTranslator<TDtoEntity,TDbEntity>:IEntityTranslator<TDtoEntity,TDbEntity>
+    public class SinglePropertyEntityConverter<TDtoEntity,TDbEntity>:EntityConverter
     {
         private readonly PropertyDescriptor _dtoPropertyInfo;
         private readonly PropertyDescriptor _dbPropertyInfo;
 
         /// <summary>
-        /// Default contructor.
+        /// Default constructor.
         /// </summary>
         /// <param name="dtoProperty">Dto property info</param>
         /// <param name="dbProperty">Db property info</param>
         /// <param name="allowDtoToDbTranslation">Allows DTO to DB translation</param>
         /// <param name="allowDbToDtoTranslation">Allows DB to DTO translation</param>
-        public SinglePropertyEntityTranslator(
+        public SinglePropertyEntityConverter(
             PropertyDescriptor dtoProperty, 
             PropertyDescriptor dbProperty,
             bool allowDtoToDbTranslation,
@@ -28,17 +28,20 @@
 
             _dtoPropertyInfo = dtoProperty;
             _dbPropertyInfo = dbProperty;
-            this.SupportsDtoToDbTranslation = allowDtoToDbTranslation;
-            this.SupportsDbToDtoTranslation = allowDbToDtoTranslation;
+            this.SupportsDtoToDbConversion = allowDtoToDbTranslation;
+            this.SupportsDbToDtoConversion = allowDbToDtoTranslation;
         }
 
         /// <summary>
         /// Called to set up a DB entity from a DTO entity.
         /// </summary>
-        /// <param name="dtoEntitySource">DTO entity source</param>
-        /// <param name="dbEntityDestination">DB entity destination</param>
-        public void Copy(TDtoEntity dtoEntitySource, TDbEntity dbEntityDestination)
+        public override void DtoToDb(EntityConversionContext conversionContext)
         {
+            Requires.ValidState(this.SupportsDtoToDbConversion, $"Conversion from '{typeof(TDtoEntity)}' to '{typeof(TDbEntity)}' is not supported.");
+
+            var dtoEntitySource = conversionContext.GetDtoEntity<TDtoEntity>();
+            var dbEntityDestination = conversionContext.GetDbEntity<TDbEntity>();
+
             var sourceValue = _dtoPropertyInfo.GetValue(dtoEntitySource);
             _dbPropertyInfo.SetValue(dbEntityDestination, sourceValue);
         }
@@ -46,22 +49,15 @@
         /// <summary>
         /// Called to set up a DTO entity from a DB entity.
         /// </summary>
-        /// <param name="dbEntitySource">DB entity source</param>
-        /// <param name="dtoEntityDestination">DTO entity destination</param>
-        public void Copy(TDbEntity dbEntitySource, TDtoEntity dtoEntityDestination)
+        public override void DbToDto(EntityConversionContext conversionContext)
         {
+            Requires.ValidState(this.SupportsDtoToDbConversion, $"Conversion from '{typeof(TDbEntity)}' to '{typeof(TDtoEntity)}' is not supported.");
+
+            var dbEntitySource = conversionContext.GetDbEntity<TDbEntity>();
+            var dtoEntityDestination = conversionContext.GetDtoEntity<TDtoEntity>();
+
             var sourceValue = _dbPropertyInfo.GetValue(dbEntitySource);
             _dtoPropertyInfo.SetValue(dtoEntityDestination, sourceValue);
         }
-
-        /// <summary>
-        /// Returns true if the instance supports DTO to DB translations.
-        /// </summary>
-        public bool SupportsDtoToDbTranslation { get; }
-
-        /// <summary>
-        /// Returns true if the instance supports DB to DTO translations.
-        /// </summary>
-        public bool SupportsDbToDtoTranslation { get; }
     }
 }
