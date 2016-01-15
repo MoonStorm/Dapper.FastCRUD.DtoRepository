@@ -1,25 +1,26 @@
 ﻿namespace Dapper.FastCrud.DtoRepository.Converters
 {
-    using Dapper.FastCrud.DtoRepository.Registrations;
+    using System.Collections.Generic;
+    using System.ComponentModel;
 
     /// <summary>
-    /// Used to copy values between a source and a destination entity.
+    /// Generic interface for all the converters used to copy values between two sets of entities.
     /// </summary>
-    public abstract class EntityConverter
+    public interface IEntityConverter
     {
         /// <summary>
         /// Gets the source entity types involved in the conversion and their property registrations.
         /// </summary>
-        public MultiEntityPropertyRegistrations SourceRegistrations { get; }
+        IEnumerable<PropertyDescriptor> SourceRegistrations { get; }
 
         /// <summary>
         /// Gets the destination entity types involved in the conversion and their property registrations.
         /// </summary>
-        public MultiEntityPropertyRegistrations DestinationRegistrations { get; }
+        IEnumerable<PropertyDescriptor> DestinationRegistrations { get; }
 
         /// <summary>
         /// Called to set up a destination from a source.
         /// </summary>
-        public abstract void Convert(EntityConversionContext conversionContext);
+        void Convert(EntityConversionContext conversionContext);
     }
 }

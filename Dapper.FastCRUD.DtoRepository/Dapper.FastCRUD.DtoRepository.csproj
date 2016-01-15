@@ -41,23 +41,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\GenericTypeObjectMap.cs" />
+    <Compile Include="Converters\TypedEntityConverter.cs" />
     <Compile Include="DtoRepository.cs" />
-    <Compile Include="Mappings\DtoSourceDestinationPropertyMapping.cs" />
-    <Compile Include="Mappings\DbDestinationMapping.cs" />
+    <Compile Include="Mappings\SourceDestinationPropertyMapping.cs" />
+    <Compile Include="Mappings\DestinationMapping.cs" />
     <Compile Include="Mappings\DtoSourcePropertyCallbackMapping.cs" />
     <Compile Include="Mappings\DtoSourceDestinationCustomMapping.cs" />
-    <Compile Include="Mappings\DtoSourceMapping.cs" />
-    <Compile Include="Mappings\DtoSourcePropertyMapping.cs" />
+    <Compile Include="Mappings\SourceMapping.cs" />
+    <Compile Include="Mappings\SourcePropertyMapping.cs" />
     <Compile Include="Converters\EntityConversionContext.cs" />
-    <Compile Include="Converters\EntityConverter.cs" />
-    <Compile Include="Registrations\MultiEntityPropertyRegistrations.cs" />
+    <Compile Include="Converters\IEntityConverter.cs" />
+    <None Include="Registrations\IEntityPropertyRegistrations_not_used.cs" />
+    <None Include="Registrations\PropertyRegistrationsEntityMap_not_used.cs" />
     <Compile Include="Registrations\TypedEntityPropertyRegistrations.cs" />
     <Compile Include="Registrations\EntityPropertyRegistrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requires.cs" />
-    <Compile Include="Converters\EntityConverterCollection.cs" />
+    <Compile Include="Converters\CombinedEntityConverter.cs" />
     <Compile Include="Converters\CallbackEntityConverter.cs" />
-    <Compile Include="Converters\SinglePropertyEntityConverter.cs" />
+    <Compile Include="Converters\PropertyEntityConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

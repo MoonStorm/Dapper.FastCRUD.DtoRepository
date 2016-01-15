@@ -5,55 +5,26 @@
     /// <summary>
     /// DTO to DB entity to entity custom converter using callbacks.
     /// </summary>
-    public class CallbackEntityConverter<TDtoEntity,TDbEntity>:EntityConverter
+    public class CallbackEntityConverter<TSource,TDestination>:TypedEntityConverter<TSource, TDestination>
     {
-        private readonly Action<TDbEntity, TDtoEntity> _dbToDtoTranslationCallback;
-        private readonly Action<TDtoEntity, TDbEntity> _dtoToDbTranslationCallback;
+        private readonly Action<TSource, TDestination, GenericTypeObjectMap> _conversionCallback;
 
         /// <summary>
-        /// Constructor that takes a callback to perform the DTO to DB entity translation 
+        /// Default constructor.
         /// </summary>
-        public CallbackEntityConverter(Action<TDtoEntity, TDbEntity> conversionFct)
+        public CallbackEntityConverter(Action<TSource, TDestination, GenericTypeObjectMap> conversionFct)
         {
             Requires.NotNull(conversionFct, nameof(conversionFct));
 
-            _dtoToDbTranslationCallback = conversionFct;
-            this.SupportsDtoToDbConversion = true;
+            _conversionCallback = conversionFct;
         }
 
         /// <summary>
-        /// Constructor that takes a callback to perform the DTO to DB entity translation 
+        /// Called to set up a destination from a source entity and available user contexts.
         /// </summary>
-        public CallbackEntityConverter(Action<TDbEntity, TDtoEntity> conversionFct)
+        protected override void Convert(TSource source, TDestination destination, GenericTypeObjectMap userContexts)
         {
-            Requires.NotNull(conversionFct, nameof(conversionFct));
-
-            _dbToDtoTranslationCallback = conversionFct;
-            this.SupportsDbToDtoConversion = true;
-        }
-
-        /// <summary>
-        /// Called to set up a DB entity from a DTO entity.
-        /// </summary>
-        public override void DtoToDb(EntityConversionContext conversionContext)
-        {
-            Requires.ValidState(this.SupportsDtoToDbConversion, $"Conversion from '{typeof(TDtoEntity)}' to '{typeof(TDbEntity)}' is not supported.");
-
-            var dtoEntity = conversionContext.GetDtoEntity<TDtoEntity>();
-            var dbEntity = conversionContext.GetDbEntity<TDbEntity>();
-            _dtoToDbTranslationCallback(dtoEntity, dbEntity);
-        }
-
-        /// <summary>
-        /// Called to set up a DTO entity from a DB entity.
-        /// </summary>
-        public override void DbToDto(EntityConversionContext conversionContext)
-        {
-            Requires.ValidState(this.SupportsDtoToDbConversion, $"Conversion from '{typeof(TDbEntity)}' to '{typeof(TDtoEntity)}' is not supported.");
-
-            var dtoEntity = conversionContext.GetDtoEntity<TDtoEntity>();
-            var dbEntity = conversionContext.GetDbEntity<TDbEntity>();
-            _dbToDtoTranslationCallback(dbEntity, dtoEntity);
+            _conversionCallback(source, destination, userContexts);
         }
     }
 }

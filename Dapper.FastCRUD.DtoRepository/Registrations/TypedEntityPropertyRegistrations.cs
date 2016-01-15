@@ -1,6 +1,7 @@
 ﻿namespace Dapper.FastCrud.DtoRepository.Registrations
 {
     using System;
+    using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -32,13 +33,12 @@
         /// <summary>
         /// Adds a new property to the collection based on a lambda expression.
         /// </summary>
-        public TypedEntityPropertyRegistrations<T> Add<TPropertyValue>(Expression<Func<T, TPropertyValue>> property)
+        public PropertyDescriptor Add<TPropertyValue>(Expression<Func<T, TPropertyValue>> property)
         {
             var memberInfo = ((MemberExpression)property.Body).Member;
             var propertyInfo = memberInfo as PropertyInfo;
             Requires.Argument(propertyInfo!=null, nameof(property), $"{memberInfo.Name} is not a property of {typeof(T)}");
-            this.Add(propertyInfo.Name);
-            return this;
+            return this.Add(propertyInfo.Name);
         }
     }
 }

@@ -8,10 +8,8 @@ namespace Dapper.FastCrud.DtoRepository.Registrations
     /// <summary>
     /// Contains the definition of all the properties on a specific entity that are involved in a mapping.
     /// </summary>
-    public class EntityPropertyRegistrations
+    public class EntityPropertyRegistrations:List<PropertyDescriptor>
     {
-        private readonly List<PropertyDescriptor> _properties = new List<PropertyDescriptor>();
-        private readonly Dictionary<string, PropertyDescriptor> _propertyNameMap = new Dictionary<string, PropertyDescriptor>();
         private readonly Type _type;
 
         /// <summary>
@@ -38,25 +36,14 @@ namespace Dapper.FastCrud.DtoRepository.Registrations
         }
 
         /// <summary>
-        /// Gets the list of properties.
+        /// Gets the entity type.
         /// </summary>
-        public IEnumerable<PropertyDescriptor> GetProperties()
-        {
-            return _properties;
-        }
-
-        /// <summary>
-        /// Get a property descriptor by name.
-        /// </summary>
-        public PropertyDescriptor GetProperty(string propertyName)
-        {
-            return _propertyNameMap[propertyName];
-        }
+        public Type EntityType => _type;
 
         /// <summary>
         /// Adds a new property to the collection by name.
         /// </summary>
-        public void Add(string propertyName)
+        public PropertyDescriptor Add(string propertyName)
         {
             var propertyInfo = TypeDescriptor
                 .GetProperties(_type)
@@ -64,12 +51,7 @@ namespace Dapper.FastCrud.DtoRepository.Registrations
                 .Single(propInfo => string.Equals(propInfo.Name, propertyName));
 
             this.Add(propertyInfo);
-        }
-
-        private void Add(PropertyDescriptor propertyInfo)
-        {
-            _properties.Add(propertyInfo);
-            _propertyNameMap[propertyInfo.Name] = propertyInfo;
+            return propertyInfo;
         }
     }
 }
