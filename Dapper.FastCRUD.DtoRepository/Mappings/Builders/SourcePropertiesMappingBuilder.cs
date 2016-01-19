@@ -13,6 +13,9 @@
         private readonly UnifyingMapping _unifyingMapping;
         private readonly TypedEntityPropertyRegistrations<TSource> _sourcePropertyDescriptors;
 
+        /// <summary>
+        /// Default constructor. 
+        /// </summary>
         public SourcePropertiesMappingBuilder(UnifyingMapping unifyingMapping, TypedEntityPropertyRegistrations<TSource> sourcePropertyDescriptors)
         {
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
@@ -23,10 +26,16 @@
             _sourcePropertyDescriptors = sourcePropertyDescriptors;
         }
 
+        /// <summary>
+        /// Continues the link in a mapping to a set of properties on the destination entity. 
+        /// </summary>
         public DestinationPropertiesMappingBuilder<TSource, TDestination> ToProperties(params Expression<Func<TDestination, object>>[] propertyNames)
         {
             //_propertyName = ((MemberExpression)propertyDefinition.Body).Member.Name;
-            return new DestinationPropertiesMappingBuilder<TSource, TDestination>(_unifyingMapping, _sourcePropertyDescriptors, propertyNames);
+            return new DestinationPropertiesMappingBuilder<TSource, TDestination>(
+                _unifyingMapping, 
+                _sourcePropertyDescriptors,
+                new TypedEntityPropertyRegistrations<TDestination>(propertyNames));
         }
     }
 }

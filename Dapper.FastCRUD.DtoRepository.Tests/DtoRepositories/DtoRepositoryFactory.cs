@@ -17,12 +17,15 @@
         private static Repository<BuildingIdentityDtoEntity> CreateBuildingIdentityDtoRepository()
         {
             var repository = new StandardRepository<BuildingIdentityDtoEntity>();
-            repository.Map.From<BuildingDbEntity>(mapping => 
-                mapping
-                    .FromProperties(db => db.BuildingId, db=> db.BuildingName)
-                    .ToProperties(dto => dto.Id, dto=> dto.Name)
-                    .WithContext(0)
-                    .UsingCallback((source, context, destination)=> {}));
+            repository.Map.From<BuildingDbEntity>(
+                mapping => mapping
+                .FromProperty(source => source.BuildingId)
+                .TwoWayToProperty(dest => dest.Id)
+                .And()
+                .FromProperty(source => source.BuildingName)
+                .TwoWayToProperty(dest => dest.Name));
+
+            return repository;
             //repository.Map.Map<BuildingIdentityDtoEntity>().To<BuildingIdentityDtoEntity>()
         }
     }

@@ -3,7 +3,7 @@
     public class BuildingDbEntity
     {
         public int BuildingId { get; set; }
-        public int BuildingName { get; set; }
+        public string BuildingName { get; set; }
 
 
         public string BuildingAddressStreet { get; set; }

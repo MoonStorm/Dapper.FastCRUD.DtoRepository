@@ -56,11 +56,8 @@
     <Compile Include="Mappings\IMapping.cs" />
     <Compile Include="Mappings\Builders\DefaultMappingBuilder.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Mappings\Builders\DestinationPropertyMapping.cs" />
     <Compile Include="Mappings\Builders\DestinationMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\DtoSourcePropertyCallbackMapping.cs" />
-    <Compile Include="Mappings\Builders\DtoSourceDestinationCustomMapping.cs" />
-    <Compile Include="Mappings\Builders\SourcePropertyMapping.cs" />
+    <Compile Include="Mappings\Builders\SourcePropertyMappingBuilder.cs" />
     <Compile Include="Converters\EntityConversionContext.cs" />
     <Compile Include="Converters\IEntityConverter.cs" />
     <Compile Include="StandardRepository.cs" />

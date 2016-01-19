@@ -1,7 +1,6 @@
 ﻿namespace Dapper.FastCrud.Dto.Mappings.Builders
 {
     using System;
-    using System.Linq.Expressions;
     using Dapper.FastCrud.DtoRepository;
     using Dapper.FastCrud.DtoRepository.Registrations;
 
@@ -10,9 +9,9 @@
     /// </summary>
     public class DestinationPropertiesMappingBuilder<TSource, TDestination>
     {
-        private UnifyingMapping _unifyingMapping;
-        private TypedEntityPropertyRegistrations<TSource> _sourcePropertyRegistrations;
-        private TypedEntityPropertyRegistrations<TDestination> _destinationPropertyRegistrations;
+        private readonly UnifyingMapping _unifyingMapping;
+        private readonly TypedEntityPropertyRegistrations<TSource> _sourcePropertyRegistrations;
+        private readonly TypedEntityPropertyRegistrations<TDestination> _destinationPropertyRegistrations;
 
         public DestinationPropertiesMappingBuilder(
             UnifyingMapping unifyingMapping,

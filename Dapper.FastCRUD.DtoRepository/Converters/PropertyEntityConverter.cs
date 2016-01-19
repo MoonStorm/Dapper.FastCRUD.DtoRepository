@@ -1,30 +1,22 @@
 ﻿namespace Dapper.FastCrud.Dto.Converters
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
     using Dapper.FastCrud.DtoRepository;
+    using Dapper.FastCrud.DtoRepository.Registrations;
 
     /// <summary>
     /// Single property to property converter.
     /// </summary>
-    public class PropertyEntityConverter<TSource,TDestination,TPropertyValue>:TypedEntityConverter<TSource,TDestination>
+    public class PropertyEntityConverter<TSource,TDestination>:TypedEntityConverter<TSource,TDestination>
     {
-        private readonly PropertyDescriptor _sourcePropertyDescriptor;
-        private readonly PropertyDescriptor _destinationPropertyDescriptor;
-
-        /// <summary>
-        /// Constructor taking the definition of two corresponding properties used in the conversion. 
-        /// </summary>
         public PropertyEntityConverter(
-            Expression<Func<TSource, TPropertyValue>> sourceProperty, 
-            Expression<Func<TDestination, TPropertyValue>> destinationProperty)
-        {
-            Requires.NotNull(sourceProperty, nameof(sourceProperty));
-            Requires.NotNull(destinationProperty, nameof(destinationProperty));
-
-            _sourcePropertyDescriptor = this.SourcePropertyRegistrations.Add(sourceProperty);
-            _destinationPropertyDescriptor = this.DestinationPropertyRegistrations.Add(destinationProperty);
+            TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations,
+            TypedEntityPropertyRegistrations<TDestination> destinationPropertyRegistrations)
+            :base(sourcePropertyRegistrations, destinationPropertyRegistrations)
+        {      
+            Requires.Range(
+                destinationPropertyRegistrations.Count==sourcePropertyRegistrations.Count, 
+                nameof(destinationPropertyRegistrations),
+                $"Property registrations for the destination '{typeof(TDestination)}' must match the ones for the source '{typeof(TSource)}'"); 
         }
 
         /// <summary>
@@ -32,8 +24,14 @@
         /// </summary>
         protected override void Convert(TSource source, TDestination destination, TypedObjectStore userContext)
         {
-            var sourcePropValue = _sourcePropertyDescriptor.GetValue(source);
-            _destinationPropertyDescriptor.SetValue(destination, sourcePropValue);
+            for (var propRegistrationIndex = 0; propRegistrationIndex < this.SourcePropertyRegistrations.Count; propRegistrationIndex++)
+            {
+                var sourcePropRegistration = this.SourcePropertyRegistrations[propRegistrationIndex];
+                var destinationPropRegistration = this.DestinationPropertyRegistrations[propRegistrationIndex];
+
+                var sourcePropValue = sourcePropRegistration.GetValue(source);
+                destinationPropRegistration.SetValue(destination, sourcePropValue);
+            }
         }
     }
 }
