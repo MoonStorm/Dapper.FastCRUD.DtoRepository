@@ -1,27 +1,27 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Converters
+﻿namespace Dapper.FastCrud.Dto.Converters
 {
     /// <summary>
     /// The context that flows through the entity converters.
     /// </summary>
     public class EntityConversionContext
     {
-        private readonly GenericTypeObjectMap _userContexts = new GenericTypeObjectMap();
-        private readonly GenericTypeObjectMap _sourceEntities = new GenericTypeObjectMap();
-        private readonly GenericTypeObjectMap _destinationEntities = new GenericTypeObjectMap();
+        private readonly TypedObjectStore _userContexts = new TypedObjectStore();
+        private readonly TypedObjectStore _sourceEntities = new TypedObjectStore();
+        private readonly TypedObjectStore _destinationEntities = new TypedObjectStore();
 
         /// <summary>
         /// Gives access to the user contexts.
         /// </summary>
-        public GenericTypeObjectMap UserContexts => _userContexts;
+        public TypedObjectStore UserContexts => _userContexts;
 
         /// <summary>
         /// Gives access to the entities representing the source.
         /// </summary>
-        public GenericTypeObjectMap Source => _sourceEntities;
+        public TypedObjectStore Source => _sourceEntities;
 
         /// <summary>
         /// Gives access to the entities representing the destination.
         /// </summary>
-        public GenericTypeObjectMap Destination => _destinationEntities;
+        public TypedObjectStore Destination => _destinationEntities;
     }
 }

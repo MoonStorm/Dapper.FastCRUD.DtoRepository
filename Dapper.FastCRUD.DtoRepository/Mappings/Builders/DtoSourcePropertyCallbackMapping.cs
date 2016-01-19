@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace Dapper.FastCrud.DtoRepository.Mappings
+﻿namespace Dapper.FastCrud.Dto.Mappings
 {
+    using System;
+    using System.Linq.Expressions;
+
     public class DtoSourcePropertyCallbackMapping<TSource, TDestination, TSourceValueProperty>
     {
         public DtoSourcePropertyCallbackMapping<TSource, TDestination, TSourceValueProperty> To<TDestinationValueProperty>(

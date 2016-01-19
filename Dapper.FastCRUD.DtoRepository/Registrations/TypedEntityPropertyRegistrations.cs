@@ -13,17 +13,29 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TypedEntityPropertyRegistrations():base(typeof(T))
+        public TypedEntityPropertyRegistrations()
+            :base(typeof(T))
         {
         }
 
         /// <summary>
         /// Constructor that takes a list of parameter names as arguments.
         /// </summary>
-        public TypedEntityPropertyRegistrations(string propertyName, params string[] propertyNames)
-            :base(typeof(T),propertyName, propertyNames)
+        public TypedEntityPropertyRegistrations(params string[] propertyNames)
+            :this()
         {
-            this.Add(propertyName);
+            foreach (var propName in propertyNames)
+            {
+                this.Add(propName);
+            }
+        }
+
+        /// <summary>
+        /// Constructor that takes a list of parameter names as arguments.
+        /// </summary>
+        public TypedEntityPropertyRegistrations(params Expression<Func<T, object>>[] propertyNames)
+            : this()
+        {
             foreach (var propName in propertyNames)
             {
                 this.Add(propName);

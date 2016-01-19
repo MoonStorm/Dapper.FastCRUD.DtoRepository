@@ -1,4 +1,4 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Converters
+﻿namespace Dapper.FastCrud.Dto.Converters
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -6,7 +6,7 @@
     /// <summary>
     /// Acts as an entity converter that wraps the conversion using multiple entity converters.
     /// </summary>
-    public class CombinedEntityConverter:IEntityConverter
+    public class AggregatedEntityConverter:IEntityConverter
     {
         private readonly List<IEntityConverter> _entityConverters = new List<IEntityConverter>();
 

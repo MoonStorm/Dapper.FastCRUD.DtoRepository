@@ -3,24 +3,25 @@
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    /// <summary>
-    /// Generic interface for all the converters used to copy values between two sets of entities.
-    /// </summary>
-    public interface IEntityConverter
+    public class EmptyConverter:IEntityConverter
     {
+        private static readonly PropertyDescriptor[] _emptyPropertyDescriptorCollection = new PropertyDescriptor[0];
+
         /// <summary>
         /// Gets the source entity types involved in the conversion and their property registrations.
         /// </summary>
-        IEnumerable<PropertyDescriptor> SourceRegistrations { get; }
+        public IEnumerable<PropertyDescriptor> SourceRegistrations => _emptyPropertyDescriptorCollection;
 
         /// <summary>
         /// Gets the destination entity types involved in the conversion and their property registrations.
         /// </summary>
-        IEnumerable<PropertyDescriptor> DestinationRegistrations { get; }
+        public IEnumerable<PropertyDescriptor> DestinationRegistrations => _emptyPropertyDescriptorCollection;
 
         /// <summary>
         /// Called to set up a destination from a source.
         /// </summary>
-        void Convert(EntityConversionContext conversionContext);
+        public void Convert(EntityConversionContext conversionContext)
+        {
+        }
     }
 }

@@ -1,8 +1,9 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Converters
+﻿namespace Dapper.FastCrud.Dto.Converters
 {
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using Dapper.FastCrud.DtoRepository;
 
     /// <summary>
     /// Single property to property converter.
@@ -29,7 +30,7 @@
         /// <summary>
         /// Called to set up a destination from a source entity and available user contexts.
         /// </summary>
-        protected override void Convert(TSource source, TDestination destination, GenericTypeObjectMap userContext)
+        protected override void Convert(TSource source, TDestination destination, TypedObjectStore userContext)
         {
             var sourcePropValue = _sourcePropertyDescriptor.GetValue(source);
             _destinationPropertyDescriptor.SetValue(destination, sourcePropValue);

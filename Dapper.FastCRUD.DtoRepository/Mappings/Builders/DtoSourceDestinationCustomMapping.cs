@@ -1,4 +1,4 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Mappings
+﻿namespace Dapper.FastCrud.Dto.Mappings
 {
     public class DtoSourceDestinationCustomMapping<TSource, TDestination>
     {

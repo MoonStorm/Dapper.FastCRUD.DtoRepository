@@ -1,13 +1,12 @@
-﻿namespace Dapper.FastCrud.DtoRepository.Mappings
+﻿namespace Dapper.FastCrud.Dto.Mappings.Builders
 {
     using System;
-    using Dapper.FastCrud.DtoRepository.Converters;
+    using Dapper.FastCrud.Dto.Converters;
 
-    public class SourceDestinationPropertyMapping<TSource, TDestination, TSourcePropertyValue, TDestinationPropertyValue>
+    public class DestinationPropertyMapping<TSource, TDestination, TSourcePropertyValue, TDestinationPropertyValue>
     {
         public IEntityConverter ComputedWithContext<TContext>(Func<TSourcePropertyValue, TContext, TDestinationPropertyValue> callback)
         {
-            return new Call
         }
 
         public IDtoMapping Computed(Func<TSourcePropertyValue, TDestinationPropertyValue> callback)
