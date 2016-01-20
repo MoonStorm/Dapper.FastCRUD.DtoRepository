@@ -12,7 +12,7 @@
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public DestinationMappingBuilder(UnifyingMapping unifyingMapping)
+        internal DestinationMappingBuilder(UnifyingMapping unifyingMapping)
         {
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
 

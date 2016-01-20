@@ -12,7 +12,7 @@
     {
         private readonly Lazy<UnifyingMapping> _outputMapping;
 
-        public DestinationTransitionalMappingBuilder(UnifyingMapping unifyingMapping)
+        internal DestinationTransitionalMappingBuilder(UnifyingMapping unifyingMapping)
         {
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
             _outputMapping = new Lazy<UnifyingMapping>(

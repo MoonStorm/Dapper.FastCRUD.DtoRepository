@@ -13,7 +13,7 @@
         private readonly TypedEntityPropertyRegistrations<TSource> _sourcePropertyRegistrations;
         private readonly TypedEntityPropertyRegistrations<TDestination> _destinationPropertyRegistrations;
 
-        public DestinationPropertiesMappingBuilder(
+        internal DestinationPropertiesMappingBuilder(
             UnifyingMapping unifyingMapping,
             TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations,
             TypedEntityPropertyRegistrations<TDestination> destinationPropertyRegistrations)
@@ -21,9 +21,6 @@
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
             Requires.NotNull(sourcePropertyRegistrations, nameof(sourcePropertyRegistrations));
             Requires.NotNull(destinationPropertyRegistrations, nameof(destinationPropertyRegistrations));
-
-            Requires.Range(sourcePropertyRegistrations.Count > 0, $"Please provide all the properties used in the conversion of '{typeof(TSource)}' to '{typeof(TDestination)}'.");
-            Requires.Range(destinationPropertyRegistrations.Count > 0, $"Please provide all the properties used in the conversion of '{typeof(TSource)}' to '{typeof(TDestination)}'.");
 
             _unifyingMapping = unifyingMapping;
             _sourcePropertyRegistrations = sourcePropertyRegistrations;

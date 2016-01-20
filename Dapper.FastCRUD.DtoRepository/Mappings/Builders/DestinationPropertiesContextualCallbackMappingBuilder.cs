@@ -15,7 +15,7 @@
         private readonly TypedEntityPropertyRegistrations<TDestination> _destinationPropertyRegistrations;
         private readonly Func<TSource, TContext> _contextResolver;
 
-        public DestinationPropertiesContextualCallbackMappingBuilder(
+        internal DestinationPropertiesContextualCallbackMappingBuilder(
             UnifyingMapping unifyingMapping,
             TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations,
             TypedEntityPropertyRegistrations<TDestination> destinationPropertyRegistrations,

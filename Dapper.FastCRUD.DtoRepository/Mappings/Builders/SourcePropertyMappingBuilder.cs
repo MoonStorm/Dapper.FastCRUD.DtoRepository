@@ -18,7 +18,7 @@
         /// <summary>
         /// Constructor that takes a single property registration.
         /// </summary>
-        public SourcePropertyMappingBuilder(UnifyingMapping unifyingMapping, TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations)
+        internal SourcePropertyMappingBuilder(UnifyingMapping unifyingMapping, TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations)
         {
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
             Requires.NotNull(sourcePropertyRegistrations, nameof(sourcePropertyRegistrations));

@@ -16,11 +16,10 @@
         /// <summary>
         /// Default constructor. 
         /// </summary>
-        public SourcePropertiesMappingBuilder(UnifyingMapping unifyingMapping, TypedEntityPropertyRegistrations<TSource> sourcePropertyDescriptors)
+        internal SourcePropertiesMappingBuilder(UnifyingMapping unifyingMapping, TypedEntityPropertyRegistrations<TSource> sourcePropertyDescriptors)
         {
             Requires.NotNull(unifyingMapping, nameof(unifyingMapping));
             Requires.NotNull(sourcePropertyDescriptors, nameof(sourcePropertyDescriptors));            
-            Requires.Range(sourcePropertyDescriptors.Count > 0, $"Please provide all the properties used in the conversion of '{typeof(TSource)}' to '{typeof(TDestination)}'.");
             
             _unifyingMapping = unifyingMapping;
             _sourcePropertyDescriptors = sourcePropertyDescriptors;

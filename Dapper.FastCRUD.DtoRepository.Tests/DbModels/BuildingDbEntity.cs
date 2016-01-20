@@ -1,13 +1,13 @@
-﻿namespace Dapper.FastCRUD.DtoRepository.Tests.TestEnvironment
+﻿namespace Dapper.FastCRUD.DtoRepository.Tests.DbModels
 {
     public class BuildingDbEntity
     {
-        public int BuildingId { get; set; }
-        public string BuildingName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
 
-        public string BuildingAddressStreet { get; set; }
-        public int BuildingAddressNumber { get; set; }
-        public string BuildingAddressCity { get; set; }
+        public string AddressStreet { get; set; }
+        public int AddressNumber { get; set; }
+        public string AddressCity { get; set; }
     }
 }

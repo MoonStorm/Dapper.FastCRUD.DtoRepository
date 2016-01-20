@@ -21,7 +21,7 @@
     public abstract class Repository<TMappingBuilder, TDto> :Repository<TDto>
         where TMappingBuilder:IMappingBuilder
     {
-        private Lazy<TMappingBuilder> _mappingBuilder;
+        private readonly Lazy<TMappingBuilder> _mappingBuilder;
 
         /// <summary>
         /// Default constructor.
@@ -34,7 +34,7 @@
         /// <summary>
         /// Gets the mapping builder.
         /// </summary>
-        public TMappingBuilder Map { get; }
+        public TMappingBuilder Map => _mappingBuilder.Value;
 
         /// <summary>
         /// Constructs the mapping builder.

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StringInterpolationBridge, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StringInterpolationBridge.0.9.1\lib\net40\StringInterpolationBridge.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +65,12 @@
     <Compile Include="Converters\EntityConversionContext.cs" />
     <Compile Include="Converters\IEntityConverter.cs" />
     <Compile Include="StandardRepository.cs" />
+    <None Include="StatementOptions\ConditionalBulkSqlStatementOptionsBuilder.cs" />
+    <None Include="StatementOptions\ConditionalSqlStatementOptionsBuilder.cs" />
+    <None Include="StatementOptions\DtoStatementOptionsBuilderBase.cs" />
+    <None Include="StatementOptions\RangedBatchSqlStatementOptionsBuilder.cs" />
+    <None Include="StatementOptions\StandardDtoStatementOptionsBuilder.cs" />
+    <None Include="packages.config" />
     <None Include="Registrations\IEntityPropertyRegistrations_not_used.cs" />
     <None Include="Registrations\PropertyRegistrationsEntityMap_not_used.cs" />
     <Compile Include="Registrations\TypedEntityPropertyRegistrations.cs" />

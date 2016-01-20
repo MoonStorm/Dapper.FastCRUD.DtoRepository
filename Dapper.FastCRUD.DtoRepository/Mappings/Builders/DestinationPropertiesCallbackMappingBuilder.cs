@@ -14,7 +14,7 @@
         private readonly TypedEntityPropertyRegistrations<TDestination> _destinationPropertyRegistrations;
         private readonly Action<TSource, TDestination, TypedObjectStore> _callbackAction;
 
-        public DestinationPropertiesCallbackMappingBuilder(
+        internal DestinationPropertiesCallbackMappingBuilder(
             UnifyingMapping unifyingMapping,
             TypedEntityPropertyRegistrations<TSource> sourcePropertyRegistrations,
             TypedEntityPropertyRegistrations<TDestination> destinationPropertyRegistrations,
