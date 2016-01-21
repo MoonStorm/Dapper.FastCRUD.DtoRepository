@@ -1,10 +1,10 @@
-﻿namespace Dapper.FastCrud.Dto.Converters
+﻿namespace Dapper.FastCrud.Dto.Entity.Converters
 {
     using System;
     using System.Collections.Generic;
     using Dapper.FastCrud.DtoRepository;
 
-    public class TypedObjectStore
+    public class ContextStore
     {
         private readonly Dictionary<Type, Func<object>> _typeObjFuncMap = new Dictionary<Type, Func<object>>();
         private readonly Dictionary<Type, object> _typeObjMap = new Dictionary<Type, object>();

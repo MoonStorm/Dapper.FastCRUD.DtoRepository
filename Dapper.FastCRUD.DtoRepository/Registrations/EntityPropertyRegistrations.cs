@@ -1,57 +1,59 @@
-namespace Dapper.FastCrud.DtoRepository.Registrations
+namespace Dapper.FastCrud.Dto.Registrations
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
+    using System.Linq.Expressions;
+    using Dapper.FastCrud.DtoRepository;
 
     /// <summary>
     /// Contains the definition of all the properties on a specific entity that are involved in a mapping.
     /// </summary>
-    public class EntityPropertyRegistrations:List<PropertyDescriptor>
+    public class EntityPropertyRegistrations
     {
-        private readonly Type _type;
+        private List<EntityPropertyRegistration> _propertyRegistrations;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        /// Default constructor.
         /// </summary>
-        public EntityPropertyRegistrations(Type type)
-        {
-            Requires.NotNull(type, nameof(type));
-
-            _type = type;
+        public EntityPropertyRegistrations()
+        {            
+            _propertyRegistrations = new List<EntityPropertyRegistration>();
         }
 
         /// <summary>
-        /// Constructor that takes a list of parameter names as arguments.
+        /// Registers a new set of properties.
         /// </summary>
-        public EntityPropertyRegistrations(Type type, string propertyName, params string[] propertyNames)
-            :this(type)
+        public void AddRange<TEntity>(params Expression<Func<TEntity, object>>[] properties)
         {
-            this.Add(propertyName);
-            foreach (var propName in propertyNames)
+            Requires.NotNull(properties, nameof(properties));
+
+            foreach (var property in properties)
             {
-                this.Add(propName);
+                this.Add(new TypedEntityPropertyRegistration<TEntity>(property));
             }
         }
 
         /// <summary>
-        /// Gets the entity type.
+        /// Registers a new property.
         /// </summary>
-        public Type EntityType => _type;
+        public TypedEntityPropertyRegistration<TEntity> Add<TEntity>(Expression<Func<TEntity, object>> property)
+        {
+            Requires.NotNull(property, nameof(property));
+
+            var propertyRegistration = new TypedEntityPropertyRegistration<TEntity>(property);
+            this.Add(propertyRegistration);
+
+            return propertyRegistration;
+        }
 
         /// <summary>
-        /// Adds a new property to the collection by name.
+        /// Registers a new property.
         /// </summary>
-        public PropertyDescriptor Add(string propertyName)
+        public void Add(EntityPropertyRegistration propertyRegistration)
         {
-            var propertyInfo = TypeDescriptor
-                .GetProperties(_type)
-                .OfType<PropertyDescriptor>()
-                .Single(propInfo => string.Equals(propInfo.Name, propertyName));
+            Requires.NotNull(propertyRegistration, nameof(propertyRegistration));
 
-            this.Add(propertyInfo);
-            return propertyInfo;
+            _propertyRegistrations.Add(propertyRegistration);
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using Dapper.FastCrud.Dto.Mappings;
     using Dapper.FastCrud.Dto.Mappings.Builders;
 
     /// <summary>

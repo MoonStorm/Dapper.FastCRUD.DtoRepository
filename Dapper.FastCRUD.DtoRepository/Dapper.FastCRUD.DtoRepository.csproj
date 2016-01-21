@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.38.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper.FastCrud, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.FastCrud.2.3.0\lib\net45\Dapper.FastCrud.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StringInterpolationBridge, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StringInterpolationBridge.0.9.1\lib\net40\StringInterpolationBridge.dll</HintPath>
       <Private>True</Private>
@@ -44,43 +52,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\EmptyConverter.cs" />
-    <Compile Include="Converters\TypedObjectStore.cs" />
-    <Compile Include="Converters\TypedEntityConverter.cs" />
-    <Compile Include="Mappings\Builders\DestinationPropertiesContextualCallbackMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\DestinationPropertiesCallbackMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\DestinationPropertiesMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\DestinationTransitionalMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\SourcePropertiesMappingBuilder.cs" />
-    <Compile Include="Mappings\UnifyingMapping.cs" />
-    <Compile Include="Mappings\Builders\IMappingBuilder.cs" />
-    <Compile Include="Mappings\DbToDtoUnifyingMapping.cs" />
-    <Compile Include="Mappings\DtoToDbUnifyingMapping.cs" />
-    <Compile Include="Mappings\AggregatedMapping.cs" />
+    <Compile Include="Entity\Builders\DbToDto\DbCallbackMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DbToDto\DbMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DbToDto\DbMappingTransitionBuilder.cs" />
+    <Compile Include="Entity\Builders\DbToDto\DbPropertiesMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DbToDto\DbPropertyMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DtoToDb\DtoCallbackMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DtoToDb\DtoMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DtoToDb\DtoMappingTransitionBuilder.cs" />
+    <Compile Include="Entity\Builders\DtoToDb\DtoPropertiesMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\DtoToDb\DtoPropertyMappingBuilder.cs" />
+    <Compile Include="Entity\Converters\AggregatorEntityConverter.cs" />
+    <Compile Include="Entity\Converters\EmptyEntityConverter.cs" />
+    <Compile Include="Entity\Converters\TypedEntityCallbackConverter.cs" />
+    <Compile Include="Entity\Converters\TypedEntityConverter.cs" />
+    <Compile Include="Entity\Converters\ContextStore.cs" />
+    <Compile Include="Entity\Converters\TypedEntityPropertyConverter.cs" />
+    <Compile Include="Mappings\IMappingBuilder.cs" />
+    <Compile Include="Mappings\AggregatorMapping.cs" />
     <Compile Include="Mappings\IMapping.cs" />
-    <Compile Include="Mappings\Builders\DefaultMappingBuilder.cs" />
+    <Compile Include="Entity\Builders\StandardMappingBuilder.cs" />
+    <Compile Include="Registrations\EntityPropertyRegistration.cs" />
+    <Compile Include="Registrations\TypedEntityPropertyRegistration.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Mappings\Builders\DestinationMappingBuilder.cs" />
-    <Compile Include="Mappings\Builders\SourcePropertyMappingBuilder.cs" />
-    <Compile Include="Converters\EntityConversionContext.cs" />
-    <Compile Include="Converters\IEntityConverter.cs" />
+    <Compile Include="Entity\Converters\EntityConversionContext.cs" />
+    <Compile Include="Entity\Converters\IEntityConverter.cs" />
     <Compile Include="StandardRepository.cs" />
+    <Compile Include="StatementOptions\Converters\AggregatorStatementOptionsConverter.cs" />
+    <Compile Include="StatementOptions\Converters\IStatementOptionsConverter.cs" />
     <None Include="StatementOptions\ConditionalBulkSqlStatementOptionsBuilder.cs" />
     <None Include="StatementOptions\ConditionalSqlStatementOptionsBuilder.cs" />
     <None Include="StatementOptions\DtoStatementOptionsBuilderBase.cs" />
     <None Include="StatementOptions\RangedBatchSqlStatementOptionsBuilder.cs" />
     <None Include="StatementOptions\StandardDtoStatementOptionsBuilder.cs" />
     <None Include="packages.config" />
-    <None Include="Registrations\IEntityPropertyRegistrations_not_used.cs" />
-    <None Include="Registrations\PropertyRegistrationsEntityMap_not_used.cs" />
-    <Compile Include="Registrations\TypedEntityPropertyRegistrations.cs" />
     <Compile Include="Registrations\EntityPropertyRegistrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requires.cs" />
-    <Compile Include="Converters\AggregatedEntityConverter.cs" />
-    <Compile Include="Converters\CallbackEntityConverter.cs" />
-    <Compile Include="Converters\PropertyEntityConverter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

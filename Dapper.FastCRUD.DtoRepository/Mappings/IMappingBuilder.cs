@@ -1,13 +1,13 @@
-﻿namespace Dapper.FastCrud.Dto.Mappings.Builders
+﻿namespace Dapper.FastCrud.Dto.Mappings
 {
     /// <summary>
     /// The contract implemented by a DTO to DB mapping builder.
     /// </summary>
-    public interface IMappingBuilder
+    public interface IMappingBuilder<TDto, TDb>
     {
         /// <summary>
         /// Resolves the final mapping.
         /// </summary>
-        IMapping ResolveMapping();
+        IMapping<TDto,TDb> ConstructMapping();
     }
 }
