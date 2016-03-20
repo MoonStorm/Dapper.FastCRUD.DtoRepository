@@ -4,6 +4,7 @@
     using Dapper.FastCrud.Dto;
     using Dapper.FastCRUD.DtoRepository.Tests.DbModels;
     using Dapper.FastCRUD.DtoRepository.Tests.DtoModels;
+    using Dapper.FastCRUD.DtoRepository.Tests.Repositories;
     using TechTalk.SpecFlow;
 
     [Binding]
@@ -16,40 +17,12 @@
             _databaseTestContext = databaseTestContext;
         }
 
-        [Given(@"I have set up the building address repository")]
-        public void GivenIHaveSetUpTheBuildingAddressRepository()
-        {
-            var repository = new StandardRepository<BuildingAddressDtoEntity>();
-            repository.Map.From<BuildingDbEntity>(
-                mapping => mapping
-                               .FromProperty(db => db.Id)
-                               .TwoWayToProperty(dto => dto.BuildingId)
-                               .And()
-                               .FromProperty(db => db.AddressStreet)
-                               .TwoWayToProperty(dto => dto.Address.Street)
-                               .And()
-                               .FromProperty(db => db.AddressNumber)
-                               .TwoWayToProperty(dto => dto.Address.Number)
-                               .And()
-                               .FromProperty(db => db.AddressCity)
-                               .TwoWayToProperty(dto => dto.Address.City));
-
-            _databaseTestContext.BuildingAddressRepository = repository;
-        }
-
         [Given(@"I have set up the building identity repository")]
         public void GivenIHaveSetUpTheBuildingIdentityRepository()
         {
-            var repository = new StandardRepository<BuildingIdentityDtoEntity>();
-            repository.Map.From<BuildingDbEntity>(mapping => mapping
-                .FromProperty(db => db.Id)
-                .TwoWayToProperty(dto => dto.Id)
-                .And()
-                .FromProperty(db => db.Id)
-                .TwoWayToProperty(dto => dto.Id));
-
-            _databaseTestContext.BuildingIdentityRepository = repository;
+            _databaseTestContext.BuildingIdentityRepository = new BuildingIdentityRepository();
         }
+
 
         [Given(@"I have inserted (.*) full building DTOs")]
         public void GivenIHaveInsertedFullBuildingDTOs(int p0)

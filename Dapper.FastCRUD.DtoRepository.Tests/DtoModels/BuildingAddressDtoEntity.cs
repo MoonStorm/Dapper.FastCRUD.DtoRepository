@@ -1,8 +1,8 @@
 ﻿namespace Dapper.FastCRUD.DtoRepository.Tests.DtoModels
 {
-    public class BuildingAddressDtoEntity
+    public class BuildingAddressDtoEntity:BuildingIdentityDtoEntity
     {
-        public int BuildingId { get; set; }
+
         public BuildingAddress Address { get; set; }
 
         public class BuildingAddress

@@ -1,17 +1,18 @@
 ﻿namespace Dapper.FastCrud.Dto
 {
-    using Dapper.FastCrud.Dto.Mappings.Builders;
+    using Dapper.FastCrud.Dto.Entity.Builders;
+
     /// <summary>
     /// A DTO repository using the default mapping builder.
     /// </summary>
-    public class StandardRepository<TDto>:Repository<DefaultMappingBuilder<TDto>,TDto>
+    public class StandardRepository<TDto, TDb>:Repository<TDto, TDb, StandardMappingBuilder<TDto, TDb>>
     {
         /// <summary>
         /// Constructs the mapping builder.
         /// </summary>
-        protected override DefaultMappingBuilder<TDto> GetBuilder()
+        protected sealed override StandardMappingBuilder<TDto, TDb> GetBuilder()
         {
-            return new DefaultMappingBuilder<TDto>();
+            return new StandardMappingBuilder<TDto, TDb>();
         }
     }
 }

@@ -35,7 +35,7 @@
         /// <summary>
         /// Defines the mapping required for DB to DTO conversions.
         /// </summary>
-        public void From(Func<DbMappingBuilder<TDb, TDto>, IMappingBuilder<TDb,TDto>> dbToDtoMappingFunc)
+        public void From(Func<DbMappingBuilder<TDb, TDto>, IMappingBuilder<TDto,TDb>> dbToDtoMappingFunc)
         {
             Requires.NotNull(dbToDtoMappingFunc, nameof(dbToDtoMappingFunc));
 
@@ -48,7 +48,7 @@
         /// </summary>
         public IMapping<TDto, TDb> ConstructMapping()
         {
-            throw new NotImplementedException();
+            return _aggregatedMappings;
         }
     }
 }

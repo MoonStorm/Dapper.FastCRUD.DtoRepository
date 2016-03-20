@@ -3,7 +3,6 @@
     using System;
     using System.Threading;
     using Dapper.FastCrud.Dto.Mappings;
-    using Dapper.FastCrud.Dto.Mappings.Builders;
 
     /// <summary>
     /// A repository for a DTO entity.
@@ -19,8 +18,8 @@
     /// </summary>
     /// <typeparam name="TMappingBuilder">Mapping builder type.</typeparam>
     /// <typeparam name="TDto">DTO entity type</typeparam>
-    public abstract class Repository<TMappingBuilder, TDto> :Repository<TDto>
-        where TMappingBuilder:IMappingBuilder
+    public abstract class Repository<TDto, TDb, TMappingBuilder> :Repository<TDto>
+        where TMappingBuilder:IMappingBuilder<TDto, TDb>
     {
         private readonly Lazy<TMappingBuilder> _mappingBuilder;
 

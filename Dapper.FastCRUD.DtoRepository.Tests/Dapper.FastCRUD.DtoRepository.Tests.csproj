@@ -55,10 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DtoModels\BuildingCombinedAddressDtoEntity.cs" />
     <Compile Include="DtoModels\BuildingIdentityDtoEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DtoModels\BuildingAddressDtoEntity.cs" />
     <Compile Include="DbModels\BuildingDbEntity.cs" />
+    <Compile Include="Repositories\BuildingAddressRepository.cs" />
+    <Compile Include="Repositories\BuildingCombinedAddressRepository.cs" />
+    <Compile Include="Repositories\BuildingIdentityRepository.cs" />
     <Compile Include="Tests\Crud.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
